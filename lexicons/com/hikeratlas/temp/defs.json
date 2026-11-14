@@ -60,8 +60,7 @@
       "type": "object",
       "description": "An account, as hikeratlas/atproto-indexer knows it.",
       "required": [
-        "did",
-        "pds"
+        "did"
       ],
       "properties": {
         "did": {
@@ -76,7 +75,7 @@
         "pds": {
           "type": "string",
           "format": "uri",
-          "description": "The account's PDS: fetch blobs (photos, GPX) from it with com.atproto.sync.getBlob."
+          "description": "The account's PDS: fetch blobs (photos, GPX) from it with com.atproto.sync.getBlob. Absent for an account the indexer has only just seen: resolve the DID."
         }
       }
     },
