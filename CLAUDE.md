@@ -14,3 +14,6 @@ record is written, it stays in someone's repository: we can't migrate it.
 - The website (hikeratlas/website `app/atproto/scope.ts`) must ask for every
   collection here: a new record type means a scope change there.
 - Run `python3 scripts/check.py` before pushing.
+- Merging to main publishes changed lexicons to @hikeratlas.com
+  (`scripts/publish.py`): what's on main is what's public. A lexicon in a new
+  namespace needs a `_lexicon` DNS TXT record (README); ask the maintainer.

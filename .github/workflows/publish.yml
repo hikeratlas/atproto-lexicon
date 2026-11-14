@@ -1,0 +1,28 @@
+name: Publish
+
+# Publishes the lexicons into @hikeratlas.com's repository (scripts/publish.py)
+# when they change on main. Needs the BSKY_APP_PASSWORD secret: an app
+# password for @hikeratlas.com. Pull requests get a dry run, without it.
+on:
+  push:
+    branches: [main]
+    paths: ['lexicons/**', 'scripts/publish.py', '.github/workflows/publish.yml']
+  pull_request:
+    paths: ['lexicons/**', 'scripts/publish.py', '.github/workflows/publish.yml']
+  workflow_dispatch:
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/check.py
+      - name: Dry run
+        if: github.event_name == 'pull_request'
+        run: python3 scripts/publish.py --dry-run
+      - name: Publish
+        if: github.event_name != 'pull_request'
+        env:
+          BSKY_APP_PASSWORD: ${{ secrets.BSKY_APP_PASSWORD }}
+        run: python3 scripts/publish.py
