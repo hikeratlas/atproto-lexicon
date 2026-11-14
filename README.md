@@ -16,12 +16,18 @@ convention for schemas that can still change in breaking ways. Stable
 | `lexicons/com/hikeratlas/temp/fave.json` | a faved route, holding only when | the route's key |
 | `lexicons/com/hikeratlas/temp/track.json` | a GPX trace of an outing, a day or a whole multi-day trip | a TID |
 | `lexicons/com/hikeratlas/temp/review.json` | a review of a hike | a TID |
-| `lexicons/com/hikeratlas/temp/defs.json` | shared: route key, point, photo | |
+| `lexicons/com/hikeratlas/temp/defs.json` | shared: route key, point, photo, and the queries' views | |
 | `lexicons/com/hikeratlas/authFull.json` | the permission set signing in can ask for | |
 
 Hiker Atlas's indexer, [atproto-indexer](https://github.com/hikeratlas/atproto-indexer),
 gathers everyone's records so hike pages can show them. Its API is defined
-here too, as query lexicons (`"type": "query"`), so any app can call it.
+here too, as query lexicons (`"type": "query"`), so any app can call it:
+
+| File | Query |
+|---|---|
+| `lexicons/com/hikeratlas/temp/getRouteStats.json` | faves, reviews and tracks counts for up to 100 route keys |
+| `lexicons/com/hikeratlas/temp/getRouteReviews.json` | a route's reviews, newest first |
+| `lexicons/com/hikeratlas/temp/getRouteTracks.json` | a route's tracks, newest first |
 
 Queries aren't records: nothing in anyone's account depends on them, so they
 may change or be deprecated, they need no permission, and the permission set
