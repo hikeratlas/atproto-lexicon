@@ -1,0 +1,60 @@
+{
+  "lexicon": 1,
+  "id": "com.hikeratlas.temp.defs",
+  "description": "Definitions shared by Hiker Atlas's records (https://www.hikeratlas.com). In beta: may change.",
+  "defs": {
+    "routeKey": {
+      "type": "string",
+      "maxLength": 128,
+      "description": "A route's key (recipe v1: https://github.com/hikeratlas/route-keys): a decodable cell part and a hash of the route's line, e.g. 1E57E06gbDEBBBICDGF.tn3dBnAuR_Q. Used as a fave's record key, and to tie tracks and reviews to a route."
+    },
+    "point": {
+      "type": "object",
+      "required": [
+        "lat",
+        "lon"
+      ],
+      "properties": {
+        "lat": {
+          "type": "integer",
+          "description": "Microdegrees (degrees × 1,000,000)."
+        },
+        "lon": {
+          "type": "integer",
+          "description": "Microdegrees."
+        }
+      }
+    },
+    "photo": {
+      "type": "object",
+      "required": [
+        "image"
+      ],
+      "properties": {
+        "image": {
+          "type": "blob",
+          "accept": [
+            "image/jpeg",
+            "image/png",
+            "image/webp"
+          ],
+          "maxSize": 2000000
+        },
+        "alt": {
+          "type": "string",
+          "maxGraphemes": 1000,
+          "description": "For people who can't see the photo."
+        },
+        "takenAt": {
+          "type": "string",
+          "format": "datetime"
+        },
+        "at": {
+          "type": "ref",
+          "ref": "#point",
+          "description": "Where it was taken, e.g. from its EXIF or its time on a track."
+        }
+      }
+    }
+  }
+}
