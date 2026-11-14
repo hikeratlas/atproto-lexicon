@@ -14,6 +14,14 @@ record is written, it stays in someone's repository: we can't migrate it.
 - The website (hikeratlas/website `app/atproto/scope.ts`) must ask for every
   collection here: a new record type means a scope change there.
 - Run `python3 scripts/check.py` before pushing.
+- Queries (`"type": "query"`, e.g. `com.hikeratlas.temp.getRouteStats`) are
+  hikeratlas/atproto-indexer's API, not records: nothing in anyone's
+  repository depends on them, so they can be changed or deprecated (say so in
+  the PR), they need no scope in the website, and they stay out of
+  `authFull.json`. Name them flat, `com.hikeratlas.temp.get<Thing>`, so the
+  existing `_lexicon.temp` TXT record covers them. Parameters are scalars or
+  arrays of scalars (no refs: they travel in the query string). Deploy the
+  indexer's side first: merging publishes the lexicon.
 - Merging to main publishes changed lexicons to @hikeratlas.com
   (`scripts/publish.py`): what's on main is what's public. A lexicon in a new
   namespace needs a `_lexicon` DNS TXT record (README); ask the maintainer.

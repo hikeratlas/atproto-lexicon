@@ -19,6 +19,14 @@ convention for schemas that can still change in breaking ways. Stable
 | `lexicons/com/hikeratlas/temp/defs.json` | shared: route key, point, photo | |
 | `lexicons/com/hikeratlas/authFull.json` | the permission set signing in can ask for | |
 
+Hiker Atlas's indexer, [atproto-indexer](https://github.com/hikeratlas/atproto-indexer),
+gathers everyone's records so hike pages can show them. Its API is defined
+here too, as query lexicons (`"type": "query"`), so any app can call it.
+
+Queries aren't records: nothing in anyone's account depends on them, so they
+may change or be deprecated, they need no permission, and the permission set
+leaves them out.
+
 Routes are named by their [route key](https://github.com/hikeratlas/route-keys),
 computed from the route's line, so no ids are minted:
 `1E57E06gbDEBBBICDGF.tn3dBnAuR_Q`. A fave's record key is the route key
@@ -61,5 +69,6 @@ records keyed by NSID, so anyone can resolve them.
 ## Checks
 
 `python3 scripts/check.py` checks every file parses, its `id` matches its
-path, its references resolve, and the permission set names only collections
-defined here. CI runs it.
+path, its references resolve, the permission set names exactly the
+collections defined here, and queries are well formed (scalar parameters,
+JSON output, a `get` name). CI runs it.
