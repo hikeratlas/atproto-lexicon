@@ -1,0 +1,47 @@
+{
+  "lexicon": 1,
+  "id": "com.hikeratlas.temp.getRouteStats",
+  "defs": {
+    "main": {
+      "type": "query",
+      "description": "Counts of faves, reviews and tracks for routes, by route key: one call for a page's routes. Served by Hiker Atlas's indexer (https://github.com/hikeratlas/atproto-indexer). In beta: may change.",
+      "parameters": {
+        "type": "params",
+        "required": [
+          "keys"
+        ],
+        "properties": {
+          "keys": {
+            "type": "array",
+            "minLength": 1,
+            "maxLength": 100,
+            "items": {
+              "type": "string",
+              "maxLength": 128,
+              "description": "A route key (com.hikeratlas.temp.defs#routeKey)."
+            }
+          }
+        }
+      },
+      "output": {
+        "encoding": "application/json",
+        "schema": {
+          "type": "object",
+          "required": [
+            "routes"
+          ],
+          "properties": {
+            "routes": {
+              "type": "array",
+              "items": {
+                "type": "ref",
+                "ref": "com.hikeratlas.temp.defs#routeStats"
+              },
+              "description": "One per distinct key asked for, in the order asked; zeros for a route nobody has posted about."
+            }
+          }
+        }
+      }
+    }
+  }
+}

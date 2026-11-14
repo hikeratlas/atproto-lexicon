@@ -55,6 +55,136 @@
           "description": "Where it was taken, e.g. from its EXIF or its time on a track."
         }
       }
+    },
+    "actorView": {
+      "type": "object",
+      "description": "An account, as hikeratlas/atproto-indexer knows it.",
+      "required": [
+        "did"
+      ],
+      "properties": {
+        "did": {
+          "type": "string",
+          "format": "did"
+        },
+        "handle": {
+          "type": "string",
+          "format": "handle",
+          "description": "Absent when the handle doesn't resolve back to the DID."
+        },
+        "pds": {
+          "type": "string",
+          "format": "uri",
+          "description": "The account's PDS: fetch blobs (photos, GPX) from it with com.atproto.sync.getBlob. Absent for an account the indexer has only just seen: resolve the DID."
+        }
+      }
+    },
+    "routeStats": {
+      "type": "object",
+      "description": "What the community has posted about a route.",
+      "required": [
+        "routeKey",
+        "faves",
+        "reviews",
+        "tracks"
+      ],
+      "properties": {
+        "routeKey": {
+          "type": "ref",
+          "ref": "#routeKey"
+        },
+        "faves": {
+          "type": "integer",
+          "minimum": 0,
+          "description": "Faves from accounts that have signed in to Hiker Atlas (have a com.hikeratlas.temp.actor.profile record)."
+        },
+        "reviews": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "tracks": {
+          "type": "integer",
+          "minimum": 0
+        },
+        "lastActivity": {
+          "type": "string",
+          "format": "datetime",
+          "description": "The newest fave, review or track's createdAt."
+        },
+        "recentTags": {
+          "type": "array",
+          "maxLength": 20,
+          "items": {
+            "type": "string",
+            "maxLength": 64
+          },
+          "description": "Tags from reviews of hikes in the last 30 days (by hikedAt, else createdAt), the most recently reported first."
+        }
+      }
+    },
+    "reviewView": {
+      "type": "object",
+      "required": [
+        "uri",
+        "cid",
+        "author",
+        "record",
+        "indexedAt"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "at-uri"
+        },
+        "cid": {
+          "type": "string",
+          "format": "cid"
+        },
+        "author": {
+          "type": "ref",
+          "ref": "#actorView"
+        },
+        "record": {
+          "type": "unknown",
+          "description": "The com.hikeratlas.temp.review record."
+        },
+        "indexedAt": {
+          "type": "string",
+          "format": "datetime"
+        }
+      }
+    },
+    "trackView": {
+      "type": "object",
+      "required": [
+        "uri",
+        "cid",
+        "author",
+        "record",
+        "indexedAt"
+      ],
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "at-uri"
+        },
+        "cid": {
+          "type": "string",
+          "format": "cid"
+        },
+        "author": {
+          "type": "ref",
+          "ref": "#actorView"
+        },
+        "record": {
+          "type": "unknown",
+          "description": "The com.hikeratlas.temp.track record."
+        },
+        "indexedAt": {
+          "type": "string",
+          "format": "datetime"
+        }
+      }
     }
   }
 }
