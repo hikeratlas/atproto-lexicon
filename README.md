@@ -34,31 +34,29 @@ Hiker Atlas asks for:
 `blob:*/*` (uploading GPX traces and photos) can't be part of a permission
 set, so it's always asked for directly.
 
-## Publishing (not done yet)
+## Publishing
 
-Publishing makes the schemas resolvable by anyone, and lets sign-in ask for
-the permission set (`include:com.hikeratlas.authFull`) instead of each
-collection. A PDS then shows "Hiker Atlas" and its description when asking,
-and adding a collection under `com.hikeratlas.*` (the stable names, too) only
-needs the published set updated, not everyone to approve again.
+The lexicons live in Hiker Atlas's own account, [@hikeratlas.com](https://bsky.app/profile/hikeratlas.com)
+(`did:plc:7onixtzlmdjijmp7ympxedte`), as `com.atproto.lexicon.schema`
+records keyed by NSID, so anyone can resolve them.
 
-1. An atproto account for Hiker Atlas itself, e.g. `@hikeratlas.com` on
-   Bluesky. Its DID (`did:plc:...`) holds the schemas, as
-   `com.atproto.lexicon.schema` records keyed by NSID.
-2. DNS TXT records pointing each namespace at that DID, one per distinct
-   prefix:
+- **Publishing is automatic.** Merging a change to `lexicons/` publishes it:
+  `.github/workflows/publish.yml` runs `scripts/publish.py`, which writes only
+  the schemas that changed. It needs the repository secret `BSKY_APP_PASSWORD`,
+  an app password for @hikeratlas.com. Pull requests get a dry run, without it.
+- **DNS points each namespace at that account**, one TXT record per distinct
+  prefix:
 
-       _lexicon.hikeratlas.com             TXT "did=did:plc:..."   (com.hikeratlas.authFull)
-       _lexicon.temp.hikeratlas.com        TXT "did=did:plc:..."   (com.hikeratlas.temp.fave, ...)
-       _lexicon.actor.temp.hikeratlas.com  TXT "did=did:plc:..."   (com.hikeratlas.temp.actor.profile)
+      _lexicon.hikeratlas.com             TXT "did=did:plc:7onixtzlmdjijmp7ympxedte"   (com.hikeratlas.authFull)
+      _lexicon.temp.hikeratlas.com        TXT "did=did:plc:7onixtzlmdjijmp7ympxedte"   (com.hikeratlas.temp.fave, ...)
+      _lexicon.actor.temp.hikeratlas.com  TXT "did=did:plc:7onixtzlmdjijmp7ympxedte"   (com.hikeratlas.temp.actor.profile)
 
-3. Publish with [goat](https://github.com/bluesky-social/goat), logged in as
-   that account: `goat lex lint`, then `goat lex publish`, from this
-   repository's root.
-4. Then the website (hikeratlas/website, `app/atproto/scope.ts`) switches its
-   `repo:` scopes to `include:com.hikeratlas.authFull`, keeping `atproto` and
-   `blob:*/*`, in the same deploy as its client metadata. People signed in
-   already keep their sessions.
+  A lexicon in a new namespace (say `com.hikeratlas.temp.trip.*`) needs a new
+  record.
+- **Once these resolve,** the website (hikeratlas/website, `app/atproto/scope.ts`)
+  can ask for `include:com.hikeratlas.authFull` instead of each collection,
+  keeping `atproto` and `blob:*/*`, in the same deploy as its client metadata.
+  People signed in already keep their sessions.
 
 ## Checks
 
