@@ -19,6 +19,15 @@
           "units": {
             "type": "ref",
             "ref": "#units"
+          },
+          "license": {
+            "type": "string",
+            "knownValues": [
+              "CC0-1.0",
+              "CC-BY-4.0",
+              "hikeratlas-only"
+            ],
+            "description": "The licence this person gives everyone for new reviews, photos and tracks (each post records its own, in its license field): CC0-1.0 (public domain; the default when unset), CC-BY-4.0, or hikeratlas-only (no licence beyond Hiker Atlas's own, which every post grants: see https://www.hikeratlas.com/terms)."
           }
         }
       }
