@@ -1,7 +1,7 @@
 {
   "lexicon": 1,
   "id": "com.hikeratlas.temp.actor.profile",
-  "description": "That an account uses Hiker Atlas (https://www.hikeratlas.com), and its settings there. Written when someone first signs in, and never overwritten; indexers find Hiker Atlas's users by it. In beta: may change.",
+  "description": "An account's Hiker Atlas (https://www.hikeratlas.com) settings. Written when the account first signs in to Hiker Atlas, so it also marks the account as a Hiker Atlas user. In beta: may change.",
   "defs": {
     "main": {
       "type": "record",
@@ -27,7 +27,7 @@
               "CC-BY-4.0",
               "hikeratlas-only"
             ],
-            "description": "The licence this person gives everyone for new reviews, photos and tracks (each post records its own, in its license field): CC0-1.0 (public domain; the default when unset), CC-BY-4.0, or hikeratlas-only (no licence beyond Hiker Atlas's own, which every post grants: see https://www.hikeratlas.com/terms)."
+            "description": "The licence for this account's new reviews and tracks, each of which records its own in its license field: CC0-1.0, CC-BY-4.0 or hikeratlas-only."
           }
         }
       }

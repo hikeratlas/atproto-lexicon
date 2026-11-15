@@ -4,7 +4,7 @@
   "defs": {
     "main": {
       "type": "query",
-      "description": "Counts of faves, reviews and tracks for routes, by route key: one call for a page's routes. Served by Hiker Atlas's indexer (https://github.com/hikeratlas/atproto-indexer). In beta: may change.",
+      "description": "Counts of faves, reviews and tracks for up to 100 routes, by route key. Served by Hiker Atlas's indexer (https://github.com/hikeratlas/atproto-indexer). In beta: may change.",
       "parameters": {
         "type": "params",
         "required": [

@@ -1,12 +1,12 @@
 {
   "lexicon": 1,
   "id": "com.hikeratlas.temp.fave",
-  "description": "A route someone faved on Hiker Atlas (https://www.hikeratlas.com); what a fave means is up to them. In beta: may change.",
+  "description": "A route an account has faved on Hiker Atlas (https://www.hikeratlas.com). In beta: may change.",
   "defs": {
     "main": {
       "type": "record",
       "key": "any",
-      "description": "The record key is the route's routeKey (com.hikeratlas.temp.defs#routeKey): faving it again replaces the record, and the record holds only when.",
+      "description": "The record key is the route's routeKey (com.hikeratlas.temp.defs#routeKey), so an account has at most one fave per route. The record holds only when it was faved.",
       "record": {
         "type": "object",
         "required": [

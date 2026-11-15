@@ -13,6 +13,9 @@ record is written, it stays in someone's repository: we can't migrate it.
   or reimplement its recipe here, link it.
 - The website (hikeratlas/website `app/atproto/scope.ts`) must ask for every
   collection here: a new record type means a scope change there.
+- Descriptions say what a record and its fields are, factually. Policy
+  (licences' meaning, what Hiker Atlas may do, defaults an app picks, how
+  writers should behave) belongs in the website's terms, not here.
 - Run `python3 scripts/check.py` before pushing.
 - Queries (`"type": "query"`, e.g. `com.hikeratlas.temp.getRouteStats`) are
   hikeratlas/atproto-indexer's API, not records: nothing in anyone's
