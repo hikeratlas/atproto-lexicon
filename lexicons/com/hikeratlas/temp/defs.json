@@ -81,7 +81,7 @@
     },
     "routeStats": {
       "type": "object",
-      "description": "What the community has posted about a route.",
+      "description": "Counts of records about a route.",
       "required": [
         "routeKey",
         "faves",
@@ -96,7 +96,7 @@
         "faves": {
           "type": "integer",
           "minimum": 0,
-          "description": "Faves from accounts that have signed in to Hiker Atlas (have a com.hikeratlas.temp.actor.profile record)."
+          "description": "Faves from accounts that have a com.hikeratlas.temp.actor.profile record."
         },
         "reviews": {
           "type": "integer",
