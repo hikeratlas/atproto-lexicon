@@ -46,6 +46,11 @@
             "minimum": 0,
             "description": "Metres climbed."
           },
+          "steps": {
+            "type": "integer",
+            "minimum": 0,
+            "description": "Steps taken during the outing, as counted by the recording device’s step counter."
+          },
           "title": {
             "type": "string",
             "maxGraphemes": 200
