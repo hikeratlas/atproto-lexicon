@@ -28,7 +28,8 @@
     "photo": {
       "type": "object",
       "required": [
-        "image"
+        "image",
+        "aspectRatio"
       ],
       "properties": {
         "image": {
@@ -53,6 +54,29 @@
           "type": "ref",
           "ref": "#point",
           "description": "Where it was taken, e.g. from its EXIF or its time on a track."
+        },
+        "aspectRatio": {
+          "type": "ref",
+          "ref": "#aspectRatio",
+          "description": "The image's width and height, as it is displayed (after any EXIF orientation), so it can be laid out before it's fetched."
+        }
+      }
+    },
+    "aspectRatio": {
+      "type": "object",
+      "description": "Width and height, in pixels or in proportion, as app.bsky.embed.defs#aspectRatio.",
+      "required": [
+        "width",
+        "height"
+      ],
+      "properties": {
+        "width": {
+          "type": "integer",
+          "minimum": 1
+        },
+        "height": {
+          "type": "integer",
+          "minimum": 1
         }
       }
     },

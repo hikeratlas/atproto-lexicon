@@ -28,6 +28,7 @@ here too, as query lexicons (`"type": "query"`), so any app can call it:
 | `lexicons/com/hikeratlas/temp/getRouteStats.json` | faves, reviews and tracks counts for up to 100 route keys |
 | `lexicons/com/hikeratlas/temp/getRouteReviews.json` | a route's reviews, newest first |
 | `lexicons/com/hikeratlas/temp/getRouteTracks.json` | a route's tracks, newest first |
+| `lexicons/com/hikeratlas/temp/getPhoto.json` | a photo of a track or review as an image (a thumbnail, or as uploaded), through a cache |
 
 Queries aren't records: nothing in anyone's account depends on them, so they
 may change or be deprecated, they need no permission, and the permission set

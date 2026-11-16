@@ -1,0 +1,47 @@
+{
+  "lexicon": 1,
+  "id": "com.hikeratlas.temp.getPhoto",
+  "defs": {
+    "main": {
+      "type": "query",
+      "description": "A photo of a track or review (com.hikeratlas.temp.defs#photo), as an image: a thumbnail, or the photo itself, from its author's PDS through a cache. Only photos of records the indexer has, and hasn't hidden. Served by Hiker Atlas's indexer (https://github.com/hikeratlas/atproto-indexer). In beta: may change.",
+      "parameters": {
+        "type": "params",
+        "required": [
+          "did",
+          "cid"
+        ],
+        "properties": {
+          "did": {
+            "type": "string",
+            "format": "did",
+            "description": "The photo's author."
+          },
+          "cid": {
+            "type": "string",
+            "format": "cid",
+            "description": "The photo's image blob (its ref)."
+          },
+          "size": {
+            "type": "string",
+            "knownValues": [
+              "thumbnail",
+              "fullsize"
+            ],
+            "default": "thumbnail",
+            "description": "thumbnail: at most 640 pixels a side; fullsize: the photo as uploaded."
+          }
+        }
+      },
+      "output": {
+        "encoding": "*/*"
+      },
+      "errors": [
+        {
+          "name": "NotFound",
+          "description": "Not a photo of a record the indexer has, or hidden."
+        }
+      ]
+    }
+  }
+}
