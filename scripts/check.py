@@ -42,7 +42,9 @@ for i, d in docs.items():
 
 # Queries (XRPC, served by hikeratlas/atproto-indexer): parameters may only be
 # scalars or arrays of scalars, as they travel in the query string; the
-# output is JSON with an object (or ref) schema; nothing else may be "main".
+# output is JSON with an object (or ref) schema, or bytes with no schema (an
+# image, as com.atproto.sync.getBlob gives a blob: "*/*" or image/*);
+# nothing else may be "main".
 PARAM_TYPES = {'boolean', 'integer', 'string', 'unknown'}
 queries = {i for i, d in docs.items() if d.get('defs', {}).get('main', {}).get('type') == 'query'}
 for i in sorted(queries):
@@ -57,8 +59,11 @@ for i in sorted(queries):
         for name in params.get('required', []):
             if name not in params.get('properties', {}): bad.append(f'{i}: required parameter {name} isn\'t defined')
     out = main.get('output')
-    if not out or out.get('encoding') != 'application/json':
-        bad.append(f'{i}: output must be application/json')
+    binary = out is not None and (out.get('encoding') == '*/*' or str(out.get('encoding', '')).startswith('image/'))
+    if binary:
+        if 'schema' in out: bad.append(f'{i}: a binary output has no schema')
+    elif not out or out.get('encoding') != 'application/json':
+        bad.append(f'{i}: output must be application/json, or bytes ("*/*" or image/*)')
     elif out.get('schema', {}).get('type') not in ('object', 'ref', 'union'):
         bad.append(f'{i}: output schema must be an object, ref or union')
     for e in main.get('errors', []):
